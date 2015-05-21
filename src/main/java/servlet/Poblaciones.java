@@ -37,6 +37,16 @@ public class Poblaciones extends HttpServlet {
         }
     }
 
+    private boolean isAuthenticated(HttpServletRequest request) {
+        boolean result = false;
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            result = session.getAttribute("user") != null;
+        }
+
+        return result;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {

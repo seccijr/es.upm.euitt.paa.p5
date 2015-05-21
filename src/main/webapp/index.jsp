@@ -6,7 +6,7 @@
         <jsp:include page="/head.jsp" />
     </head>
     <body class="container">
-        <h2>Para acceder a su gestor de poblaciones pinche <a href="/Poblaciones">aquí</a></h2>
+        <h2>Para acceder a su gestor de poblaciones pinche <a href="/Login">aquí</a></h2>
         <jsp:include page="/bot.jsp" />
     </body>
 </html>

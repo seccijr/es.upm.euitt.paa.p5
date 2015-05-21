@@ -2,10 +2,10 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.upm.euitt.paa</groupId>
-    <artifactId>p4</artifactId>
+    <artifactId>p5</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>p4</name>
+    <name>p5</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
@@ -37,9 +37,14 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/paa.provincias.3.0.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.8.10.1</version>
+        </dependency>
     </dependencies>
     <build>
-        <finalName>p4</finalName>
+        <finalName>p5</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
