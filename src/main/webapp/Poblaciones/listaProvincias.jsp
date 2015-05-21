@@ -60,9 +60,9 @@
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         Borrar población
                                     </button>
+                                    <input type="hidden" value="${poblacion.provincia}" name="provincia"/>
+                                    <input type="hidden" value="${poblacion.nombre}" name="poblacion"/>
                                 </form>
-                                <input type="hidden" value="${poblacion.provincia}" name="provincia"/>
-                                <input type="hidden" value="${poblacion.nombre}" name="poblacion"/>
                             </td>
                         </tr>
                         </c:forEach>

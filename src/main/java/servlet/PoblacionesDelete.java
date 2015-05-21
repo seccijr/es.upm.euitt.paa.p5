@@ -48,8 +48,8 @@ public class PoblacionesDelete extends HttpServlet {
     throws ServletException, IOException {
         String provincia = request.getParameter("provincia");
         String poblacion = request.getParameter("poblacion");
-        almacen.delPoblacion(provincia, poblacion);
+        boolean result = almacen.delPoblacion(provincia, poblacion);
         almacen.guardar(almacenPath);
-        response.sendRedirect("/Poblaciones?provincia=" + provincia + "&poblacion=" + poblacion);
+        response.sendRedirect("/Poblaciones?provincia=" + provincia);
     }
 }

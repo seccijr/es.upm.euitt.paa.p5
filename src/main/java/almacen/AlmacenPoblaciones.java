@@ -17,7 +17,7 @@ public class AlmacenPoblaciones implements IAlmacenPoblaciones {
      * @return      an instance of AlmacenPoblaciones
      */
     public AlmacenPoblaciones() {
-        this.almacenPoblaciones = new HashMap<String, SortedSet<IPoblacion>>();
+        almacenPoblaciones = new HashMap<String, SortedSet<IPoblacion>>();
     }
 
     /**
@@ -153,7 +153,7 @@ public class AlmacenPoblaciones implements IAlmacenPoblaciones {
             PoblacionSet poblaciones = (PoblacionSet)this.almacenPoblaciones.get(provincia);
             IPoblacion poblacion = poblaciones.find(posicion);
             boolean result = poblaciones.remove(poblacion);
-            this.almacenPoblaciones.put(provincia, poblaciones);
+            almacenPoblaciones.put(provincia, poblaciones);
 
             return result;
         }
@@ -176,7 +176,7 @@ public class AlmacenPoblaciones implements IAlmacenPoblaciones {
             PoblacionSet poblaciones = (PoblacionSet)this.almacenPoblaciones.get(provincia);
             IPoblacion poblacion = poblaciones.find(nombre);
             boolean result = poblaciones.remove(poblacion);
-            this.almacenPoblaciones.put(provincia, poblaciones);
+            almacenPoblaciones.put(provincia, poblaciones);
 
             return result;
         }
@@ -213,7 +213,7 @@ public class AlmacenPoblaciones implements IAlmacenPoblaciones {
      *                  almacén en un Set
      */
     public Set<String> getProvincias() {
-        if (this.almacenPoblaciones != null) {
+        if (almacenPoblaciones != null) {
             return this.almacenPoblaciones.keySet();
         }
 
@@ -332,7 +332,7 @@ public class AlmacenPoblaciones implements IAlmacenPoblaciones {
         try {
             FileOutputStream fileOut = new FileOutputStream(nombreFichero);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(this.almacenPoblaciones);
+            out.writeObject(almacenPoblaciones);
             out.close();
             fileOut.close();
 
@@ -357,7 +357,7 @@ public class AlmacenPoblaciones implements IAlmacenPoblaciones {
         try {
             FileInputStream fileIn = new FileInputStream(nombreFichero);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            this.almacenPoblaciones = (HashMap<String, SortedSet<IPoblacion>>) in.readObject();
+            almacenPoblaciones = (HashMap<String, SortedSet<IPoblacion>>) in.readObject();
             in.close();
             fileIn.close();
 
