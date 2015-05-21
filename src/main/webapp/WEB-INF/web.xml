@@ -10,18 +10,55 @@
         <servlet-class>servlet.Poblaciones</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PoblacionesAdd</servlet-name>
+        <servlet-class>servlet.PoblacionesAdd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PoblacionesDelete</servlet-name>
+        <servlet-class>servlet.PoblacionesDelete</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>servlet.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>servlet.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/Login</url-pattern>
+        <servlet-name>Poblaciones</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Poblaciones</servlet-name>
         <url-pattern>/Poblaciones</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PoblacionesAdd</servlet-name>
+        <url-pattern>/Poblaciones/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PoblacionesDelete</servlet-name>
+        <url-pattern>/Poblaciones/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+    <filter>
+        <filter-name>Authentication</filter-name>
+        <filter-class>filter.Authentication</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Authentication</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 </web-app>

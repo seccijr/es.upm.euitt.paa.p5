@@ -21,7 +21,7 @@ import java.net.URI;
  * Servlet implementation class Poblaciones
  */
 @SuppressWarnings("serial")
-public class Poblaciones extends HttpServlet {
+public class PoblacionesAdd extends HttpServlet {
     private IAlmacenPoblaciones almacen = null;
 
     public void init(ServletConfig servletConfig) throws ServletException {
@@ -40,27 +40,8 @@ public class Poblaciones extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        Set<String> setProvincias = almacen.getProvincias();
-        ListaProvincias listaProvincias = new ListaProvincias();
-        for (String nombreProvincia: setProvincias) {
-            int poblaciones = almacen.getNumPoblaciones(nombreProvincia);
-            Provincia provincia = new Provincia(nombreProvincia, poblaciones);
-            listaProvincias.addProvincia(provincia);
-        }
-        request.setAttribute("listaProvincias", listaProvincias);
-
-        ListaPoblaciones listaPoblaciones = null;
-        String provinciaParam = request.getParameter("provincia");
-        if (provinciaParam != null && !provinciaParam.isEmpty()) {
-            SortedSet<IPoblacion> poblaciones = almacen.getPoblaciones(provinciaParam);
-            listaPoblaciones = new ListaPoblaciones(poblaciones, provinciaParam);
-        }
-        else {
-            listaPoblaciones = new ListaPoblaciones();
-        }
-        request.setAttribute("listaPoblaciones", listaPoblaciones);
-
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Poblaciones/listaProvincias.jsp");
+        request.setAttribute("provincia", request.getParameter("provincia"));
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Poblaciones/add.jsp");
         rd.forward(request, response);
     }
 

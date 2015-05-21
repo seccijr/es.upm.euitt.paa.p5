@@ -71,9 +71,8 @@ public class Login extends HttpServlet {
             rd.forward(request, response);
         }
         else {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", login);
-            response.sendRedirect("/Poblaciones");
+            request.getSession();
+            response.sendRedirect("/");
         }
     }
 }

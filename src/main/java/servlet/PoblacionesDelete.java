@@ -21,15 +21,16 @@ import java.net.URI;
  * Servlet implementation class Poblaciones
  */
 @SuppressWarnings("serial")
-public class Poblaciones extends HttpServlet {
+public class PoblacionesDelete extends HttpServlet {
     private IAlmacenPoblaciones almacen = null;
+    private String almacenPath = null;
 
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
         almacen = new AlmacenPoblaciones();
         try {
             URI almacenUri = Poblaciones.class.getResource("/almacen.dat").toURI();
-            String almacenPath = new File(almacenUri).getAbsolutePath();
+            almacenPath = new File(almacenUri).getAbsolutePath();
             almacen.recuperar(almacenPath);
         }
         catch(URISyntaxException e) {
@@ -40,32 +41,15 @@ public class Poblaciones extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        Set<String> setProvincias = almacen.getProvincias();
-        ListaProvincias listaProvincias = new ListaProvincias();
-        for (String nombreProvincia: setProvincias) {
-            int poblaciones = almacen.getNumPoblaciones(nombreProvincia);
-            Provincia provincia = new Provincia(nombreProvincia, poblaciones);
-            listaProvincias.addProvincia(provincia);
-        }
-        request.setAttribute("listaProvincias", listaProvincias);
-
-        ListaPoblaciones listaPoblaciones = null;
-        String provinciaParam = request.getParameter("provincia");
-        if (provinciaParam != null && !provinciaParam.isEmpty()) {
-            SortedSet<IPoblacion> poblaciones = almacen.getPoblaciones(provinciaParam);
-            listaPoblaciones = new ListaPoblaciones(poblaciones, provinciaParam);
-        }
-        else {
-            listaPoblaciones = new ListaPoblaciones();
-        }
-        request.setAttribute("listaPoblaciones", listaPoblaciones);
-
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Poblaciones/listaProvincias.jsp");
-        rd.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String provincia = request.getParameter("provincia");
+        String poblacion = request.getParameter("poblacion");
+        almacen.delPoblacion(provincia, poblacion);
+        almacen.guardar(almacenPath);
+        response.sendRedirect("/Poblaciones?provincia=" + provincia + "&poblacion=" + poblacion);
     }
 }
