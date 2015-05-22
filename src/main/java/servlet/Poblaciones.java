@@ -23,14 +23,14 @@ import java.net.URI;
 @SuppressWarnings("serial")
 public class Poblaciones extends HttpServlet {
     private IAlmacenPoblaciones almacen = null;
+    private String almacenPath = null;
 
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
         almacen = new AlmacenPoblaciones();
         try {
             URI almacenUri = Poblaciones.class.getResource("/almacen.dat").toURI();
-            String almacenPath = new File(almacenUri).getAbsolutePath();
-            almacen.recuperar(almacenPath);
+            almacenPath = new File(almacenUri).getAbsolutePath();
         }
         catch(URISyntaxException e) {
             e.printStackTrace();
@@ -40,6 +40,7 @@ public class Poblaciones extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        almacen.recuperar(almacenPath);
         Set<String> setProvincias = almacen.getProvincias();
         ListaProvincias listaProvincias = new ListaProvincias();
         for (String nombreProvincia: setProvincias) {
