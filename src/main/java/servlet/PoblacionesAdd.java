@@ -1,19 +1,12 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.File;
-import java.util.Set;
-import java.util.SortedSet;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import paa.provincias.IPoblacion;
 import paa.provincias.IAlmacenPoblaciones;
-import paa.provincias.IPoblacionAEMET;
-import model.Provincia;
-import model.ListaPoblaciones;
-import model.ListaProvincias;
 import almacen.AlmacenPoblaciones;
+import almacen.Poblacion;
 import java.net.URISyntaxException;
 import java.net.URI;
 
@@ -23,14 +16,14 @@ import java.net.URI;
 @SuppressWarnings("serial")
 public class PoblacionesAdd extends HttpServlet {
     private IAlmacenPoblaciones almacen = null;
+    private String almacenPath = null;
 
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
         almacen = new AlmacenPoblaciones();
         try {
             URI almacenUri = Poblaciones.class.getResource("/almacen.dat").toURI();
-            String almacenPath = new File(almacenUri).getAbsolutePath();
-            almacen.recuperar(almacenPath);
+            almacenPath = new File(almacenUri).getAbsolutePath();
         }
         catch(URISyntaxException e) {
             e.printStackTrace();
@@ -40,6 +33,7 @@ public class PoblacionesAdd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        almacen.recuperar(almacenPath);
         request.setAttribute("provincia", request.getParameter("provincia"));
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/Poblaciones/add.jsp");
         rd.forward(request, response);
@@ -48,5 +42,14 @@ public class PoblacionesAdd extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        almacen.recuperar(almacenPath);
+        String nombre = request.getParameter("nombre");
+        String provincia = request.getParameter("provincia");
+        int habitantes = Integer.parseInt(request.getParameter("habitantes"));
+        String codigo = request.getParameter("codigo");
+        Poblacion poblacion = new Poblacion(nombre, provincia, habitantes, codigo);
+        almacen.addPoblacion(provincia, poblacion);
+        almacen.guardar(almacenPath);
+        response.sendRedirect("/Poblaciones?provincia=" + provincia);
     }
 }

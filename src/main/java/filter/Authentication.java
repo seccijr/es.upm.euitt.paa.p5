@@ -13,17 +13,18 @@ public class Authentication implements Filter {
         throws java.io.IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        if (req.getRequestURI().startsWith("/Login")) {
+        if (req.getRequestURI().startsWith("/Login") ||
+                req.getRequestURI().startsWith("/Error")) {
             chain.doFilter(request, response);
             return;
         }
 
-        HttpSession session = req.getSession(false);
-        if(session == null){
+        boolean authenticated = req.getSession().getAttribute("user") != null;
+        if(!authenticated){
             res.sendRedirect("/Login");
-        }else{
+        }
+        else{
             chain.doFilter(request, response);
-            return;
         }
     }
 

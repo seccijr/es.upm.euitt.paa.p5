@@ -79,6 +79,7 @@
                         document.location = '/Poblaciones?provincia=${provincia}';
                     });
                     </script>
+                    <input type="hidden" value="${provincia}" name="provincia"/>
                 </form>
             </div>
             <jsp:include page="/bot.jsp" />

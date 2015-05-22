@@ -68,6 +68,10 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                </c:if>
+                <c:if test="${fn:length(listaPoblaciones.poblaciones) eq 0 && not empty listaPoblaciones.provincia}">
+                <p>No hay poblaciones para la provincia de ${listaPoblaciones.provincia}</p>
+                </c:if>
                 <form action="/Poblaciones/add" method="GET">
                     <div class="btn-toolbar" role="toolbar">
                         <button id="add" class="btn btn-default" type="submit">
@@ -77,10 +81,6 @@
                     </div>
                     <input type="hidden" value="${listaPoblaciones.provincia}" name="provincia"/>
                 </form>
-                </c:if>
-                <c:if test="${fn:length(listaPoblaciones.poblaciones) eq 0 && not empty listaPoblaciones.provincia}">
-                <p>No hay poblaciones para la provincia de ${listaPoblaciones.provincia}</p>
-                </c:if>
             </div>
             <jsp:include page="/bot.jsp" />
         </div>

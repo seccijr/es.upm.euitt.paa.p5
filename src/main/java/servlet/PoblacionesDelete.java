@@ -31,7 +31,6 @@ public class PoblacionesDelete extends HttpServlet {
         try {
             URI almacenUri = Poblaciones.class.getResource("/almacen.dat").toURI();
             almacenPath = new File(almacenUri).getAbsolutePath();
-            almacen.recuperar(almacenPath);
         }
         catch(URISyntaxException e) {
             e.printStackTrace();
@@ -46,6 +45,7 @@ public class PoblacionesDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        almacen.recuperar(almacenPath);
         String provincia = request.getParameter("provincia");
         String poblacion = request.getParameter("poblacion");
         boolean result = almacen.delPoblacion(provincia, poblacion);
