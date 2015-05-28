@@ -18,6 +18,10 @@
         <servlet-class>servlet.PoblacionesDelete</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PoblacionesDeleteAll</servlet-name>
+        <servlet-class>servlet.PoblacionesDeleteAll</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>servlet.Login</servlet-class>
     </servlet>
@@ -44,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>PoblacionesDelete</servlet-name>
         <url-pattern>/Poblaciones/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PoblacionesDeleteAll</servlet-name>
+        <url-pattern>/Poblaciones/deleteAll</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>

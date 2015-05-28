@@ -81,6 +81,17 @@
                     </div>
                     <input type="hidden" value="${listaPoblaciones.provincia}" name="provincia"/>
                 </form>
+                <c:if test="${fn:length(listaPoblaciones.poblaciones) gt 0}">
+                <form action="/Poblaciones/deleteAll" method="POST">
+                    <div class="btn-toolbar" role="toolbar">
+                        <button id="deleteAll" class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            Borrar todas la poblaciones
+                        </button>
+                    </div>
+                    <input type="hidden" value="${listaPoblaciones.provincia}" name="provincia"/>
+                </form>
+                </c:if>
             </div>
             <jsp:include page="/bot.jsp" />
         </div>
